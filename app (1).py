@@ -646,43 +646,18 @@ df3 = df3[
 # In[57]:
 
 
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
-
-model_name = "facebook/nllb-200-distilled-600M"
-tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)
-model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
+# <b>Translating app names simplified
 
 lang_code_map = {
-    'BEAUTY': 'hin_Deva',    # Hindi
-    'BUSINESS': 'tam_Taml',  # Tamil
-    'DATING': 'deu_Latn',    # German
+    'BEAUTY': 'सौंदर्य',
+    'BUSINESS': 'வணிகம்',
+    'DATING': 'Dating',
 }
 
 def translate_category_nllb(category):
-    if category not in lang_code_map:
-        return category
-
-    tgt_lang = lang_code_map[category]
-    src_lang = 'eng_Latn'
-
-    tokenizer.src_lang = src_lang
-    encoded = tokenizer(category, return_tensors="pt")
-    generated_tokens = model.generate(
-        **encoded,
-        forced_bos_token_id=tokenizer.convert_tokens_to_ids(tgt_lang)
-    )
-    return tokenizer.decode(generated_tokens[0], skip_special_tokens=True)
-
-
-# Dating category transformed into german is not present in current dataframe as it starts with "D" and not "E,C or B". So this condition is not included.
-
-# In[59]:
-
+    return lang_code_map.get(category, category)
 
 df3['Translated_Category'] = df3['Category'].apply(translate_category_nllb)
-
-
-# In[60]:
 
 
 df3 = df3.sort_values('Last Updated')
