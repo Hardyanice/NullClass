@@ -13,8 +13,11 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import nltk
-import os
 import streamlit as st
+import pytz
+import datetime
+
+
 
 
 # In[2]:
@@ -135,41 +138,7 @@ apps_df['Last Updated']=pd.to_datetime(apps_df['Last Updated'],errors='coerce')
 
 apps_df['Year']=apps_df['Last Updated'].dt.year
 
-
-# In[19]:
-
-
-html_files_path="./"
-if not os.path.exists(html_files_path):
-    os.makedirs(html_files_path)
-
-
-# In[20]:
-
-
-plot_containers=""
-
-
-# In[21]:
-
-
-# Save each Plotly figure to an HTML file
-def save_plot_as_html(fig, filename, insight):
-    global plot_containers
-    filepath = os.path.join(html_files_path, filename)
-    html_content = pio.to_html(fig, full_html=False, include_plotlyjs='inline')
-    # Append the plot and its insight to plot_containers
-    plot_containers += f"""
-    <div class="plot-container" id="{filename}" onclick="openPlot('{filename}')">
-        <div class="plot">{html_content}</div>
-        <div class="insights">{insight}</div>
-    </div>
-    """
-    fig.write_html(filepath, full_html=False, include_plotlyjs='inline')
-
-
 # In[22]:
-
 
 plot_width=400
 plot_height=300
@@ -263,9 +232,7 @@ fig3.update_layout(
 
 st.plotly_chart(fig3, use_container_width=True)
 
-
 # In[26]:
-
 
 #Figure 4
 st.subheader("Sentiment distribution")
@@ -554,10 +521,6 @@ df_bar=df_grouped[["Avg_Rating","Total_Reviews"]]
 # <b> Creating function to write messege in html
 
 # In[44]:
-
-
-import pytz
-import datetime
 
 
 # <b> Creating timestamped grouped bar chart
