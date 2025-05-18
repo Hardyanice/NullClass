@@ -8,9 +8,6 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import plotly.io as pio
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_squared_error, r2_score
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import nltk
 import streamlit as st
