@@ -617,7 +617,7 @@ if 15 <= now_ist.hour < 17:
         st.plotly_chart(fig12, use_container_width=True)
 
 else:
-    st.warning("⏰ This dashboard is only accessible from 3 PM to 5 PM IST. Please come back later.")
+    st.warning("This dashboard is only accessible from 3 PM to 5 PM IST. Please come back later.")
 
 
 # ### Task-3: Plot a time series line chart to show the trend of total installs over time, segmented by app category. Highlight periods of significant growth by shading the areas under the curve where the increase in installs exceeds 20% month-over-month and app name should not starts with x, y ,z and app category should start with letter " E " or " C " or " B " and We have to translate the Beauty category in Hindi and Business category in Tamil and Dating category in German while showing it on Graph. reviews should be more than 500 the app name should not contain letter "S" as well as this graph should work only between 6 PM IST to 9 PM IST apart from that time we should not show this graph in dashboard itself
@@ -774,5 +774,5 @@ if 18 <= now_ist.hour < 21:
 
     st.plotly_chart(fig13, use_container_width=True)
 else:
-    st.warning("⏰ This dashboard is only accessible from 6 PM to 9 PM IST. Please come back later.")
+    st.warning("This dashboard is only accessible from 6 PM to 9 PM IST. Please come back later.")
 
